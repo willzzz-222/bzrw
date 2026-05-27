@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>群聊发布任务</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="phone">
+    <section class="workspace-page" id="workspace-page">
+      <div class="status workspace-status">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <span class="signal"></span>
+          <span class="wifi"></span>
+          <span class="battery"></span>
+        </div>
+      </div>
+      <main class="workspace-main">
+        <header class="workspace-user">
+          <div class="workspace-avatar"></div>
+          <strong>韩梅梅老师</strong>
+          <button type="button">⌕</button>
+          <button type="button">▢</button>
+        </header>
+        <section class="workspace-tools">
+          <button id="workspace-open-task-manage" type="button"><span class="tool-icon blue">🗒</span><em>布置任务</em></button>
+          <button type="button"><span class="tool-icon green">🗓</span><em>课程表</em></button>
+          <button type="button"><span class="tool-icon yellow">📝</span><em>作业统计</em></button>
+          <button type="button"><span class="tool-icon sky">📘</span><em>学情报告</em></button>
+          <button type="button"><span class="tool-icon purple">🔔</span><em>催交作业</em></button>
+        </section>
+
+        <section class="workspace-panel">
+          <div class="workspace-tabs">
+            <button class="active" id="workspace-tab-course" type="button">今日课程</button>
+            <button id="workspace-tab-review" type="button">待批作业 <i>96</i></button>
+          </div>
+          <div id="workspace-panel-content">
+            <article class="course-card">
+              <div class="course-head">
+                <div><strong>09:00</strong><span>11:00</span></div>
+                <div><h3>三年级·周五晚上·第2课次</h3><p>四里河#102</p></div>
+              </div>
+              <div class="course-foot"><span>助教：韩梅梅</span><button type="button">补卡</button></div>
+            </article>
+            <article class="course-card active">
+              <div class="course-head">
+                <div><strong>14:00</strong><span>16:00</span></div>
+                <div><h3>三年级·周五晚上·第2课次</h3><p>正在大冒险 · 四里河#102</p></div>
+              </div>
+              <div class="course-foot"><span>助教：韩梅梅</span><button type="button">打卡</button></div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer class="bottom-tabs">
+        <button class="active" id="tab-workspace" type="button"><span>▥</span>工作台</button>
+        <button type="button"><span>▤</span>班级</button>
+        <button id="tab-chat-list" type="button"><span>●●●<i>1</i></span>聊天</button>
+        <button type="button"><span>◔</span>我的</button>
+      </footer>
+    </section>
+
+    <section class="chat-list-page hidden-page" id="chat-list-page">
+      <div class="list-status">
+        <div class="list-time">17:33</div>
+        <div class="list-icons"><span class="signal"></span><strong>5G</strong><span class="battery"></span></div>
+      </div>
+
+      <header class="list-header">
+        <span></span>
+        <h1>班级群</h1>
+        <button class="list-more" id="list-more" type="button" aria-label="更多">•••</button>
+        <div class="more-menu hidden" id="more-menu">
+          <button type="button"><span>▣</span> 消息</button>
+          <button type="button"><span>☎</span> 通话</button>
+          <button type="button" id="open-my-qrcode"><span>▦</span> 我的二维码</button>
+          <button type="button" id="open-task-manage"><span>▤</span> 布置任务</button>
+        </div>
+      </header>
+
+      <div class="notice-bar">
+        <span>!</span>
+        <strong>打开消息通知，重要信息不错过</strong>
+        <button type="button">去开启</button>
+        <i>×</i>
+      </div>
+
+      <main class="list-main">
+        <label class="search-box"><span>⌕</span><input placeholder="搜索" /></label>
+        <nav class="list-tabs">
+          <button class="active" type="button">全部</button>
+          <button type="button">单聊</button>
+          <button type="button">上课中</button>
+          <button type="button">未开始</button>
+          <button type="button">已结课</button>
+        </nav>
+
+        <section class="conversation-list">
+          <button class="conversation-item" id="open-group-chat" type="button">
+            <span class="course-avatar gray">周五<br>上午</span>
+            <span class="conversation-copy">
+              <strong>一二秋季周五上午语言传播·杨静洋</strong>
+              <em>[图片]</em>
+            </span>
+            <span class="conversation-time">17:12</span>
+          </button>
+          <button class="conversation-item" type="button">
+            <span class="course-avatar blue">G3<br>M</span>
+            <span class="conversation-copy">
+              <strong>三年级信息学算法秋季课家长群1群</strong>
+              <em>憨憨1家长：[动画表情]</em>
+            </span>
+            <span class="conversation-time">昨天 14:24</span>
+          </button>
+          <button class="conversation-item" type="button">
+            <span class="parent-avatar"></span>
+            <span class="conversation-copy">
+              <strong>静洋/静洋2/静洋3/齐之一测/伏绍全...</strong>
+              <em>[消息卡片]信息学语言传播初一【秋季】</em>
+            </span>
+            <span class="conversation-time">星期三</span>
+          </button>
+          <button class="conversation-item" type="button">
+            <span class="course-avatar gray">零期<br>下午</span>
+            <span class="conversation-copy">
+              <strong>一年级暑假零期下午算法·郑小舍老师</strong>
+              <em>[动画表情]</em>
+            </span>
+            <span class="conversation-time">星期三</span>
+          </button>
+          <button class="conversation-item" type="button">
+            <span class="parent-avatar"></span>
+            <span class="conversation-copy">
+              <strong>测试家长</strong>
+              <em>测试「第1课次课后练习」非常棒</em>
+            </span>
+            <span class="conversation-time">星期三</span>
+          </button>
+          <button class="conversation-item" type="button">
+            <span class="parent-avatar"></span>
+            <span class="conversation-copy">
+              <strong>17301351906家长</strong>
+              <em>17301351906「第10课次课后练习」全对</em>
+            </span>
+            <span class="conversation-time">星期三</span>
+          </button>
+          <button class="conversation-item" type="button">
+            <span class="parent-avatar"></span>
+            <span class="conversation-copy">
+              <strong>测试退款-禁用/测试pad1家长</strong>
+              <em>[消息卡片]</em>
+            </span>
+            <span class="conversation-time">星期二</span>
+          </button>
+        </section>
+      </main>
+
+      <footer class="bottom-tabs">
+        <button id="tab-workspace-back" type="button"><span>▥</span>工作台</button>
+        <button type="button"><span>▤</span>班级</button>
+        <button class="active" type="button"><span>●●●<i>1</i></span>聊天</button>
+        <button type="button"><span>◔</span>我的</button>
+      </footer>
+    </section>
+
+    <section class="group-chat-page hidden-page" id="group-chat-page">
+      <div class="status">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <span class="signal"></span>
+          <span class="wifi"></span>
+          <span class="battery"></span>
+        </div>
+      </div>
+
+      <header class="chat-header">
+        <button class="back" id="back-to-list" type="button">‹</button>
+        <div class="title-wrap">
+          <div class="title">亚丽</div>
+          <div class="subtitle">【寒假】二年级信息学算法周一下午小星星线上-梁亚丽</div>
+        </div>
+        <div class="more">⋮</div>
+      </header>
+
+      <main class="chat-main" id="chat-main">
+        <div class="bubble-wrap">
+          <div class="bubble">各位家长大家好！<br>寒假课程本周就要开课啦！ 👋我是孩子们的信息学语言传播课程的老师——舒晶晶老师，接下来的课程将和孩子们一起度过~</div>
+          <div class="avatar">晶晶</div>
+        </div>
+        <div id="task-card-container"></div>
+      </main>
+
+      <section class="input-bar" id="input-bar">
+        <div class="voice">◔</div>
+        <div class="input">请输入</div>
+        <div class="emoji">☺</div>
+        <button class="plus" id="toggle-panel" type="button">＋</button>
+      </section>
+
+      <section class="panel" id="chat-panel">
+        <div class="grid">
+          <div class="item"><div class="icon">🖼</div><div class="label">图片</div></div>
+          <div class="item"><div class="icon">📷</div><div class="label">拍照</div></div>
+          <div class="item"><div class="icon">🎥</div><div class="label">录制视频</div></div>
+          <div class="item"><div class="icon">📞</div><div class="label">语音通话</div></div>
+          <div class="item"><div class="icon">🗂</div><div class="label">文件</div></div>
+          <div class="item"><div class="icon">📍</div><div class="label">位置</div></div>
+          <div class="item"><div class="icon">✿</div><div class="label">发小红花</div></div>
+          <button class="item trigger-item" id="trigger-task" type="button"><div class="icon">📝</div><div class="label">发布任务</div></button>
+        </div>
+        <div class="home-indicator"></div>
+      </section>
+    </section>
+
+    <section class="task-manage-page hidden-page" id="task-manage-page">
+      <div class="status manage-status">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <span class="signal"></span>
+          <span class="wifi"></span>
+          <span class="battery"></span>
+        </div>
+      </div>
+
+      <header class="manage-header">
+        <button class="back" id="back-from-manage" type="button">‹</button>
+        <h1>任务管理</h1>
+        <button class="manage-create" id="manage-create-task" type="button"><span>＋</span>布置任务</button>
+      </header>
+
+      <main class="manage-main">
+        <nav class="manage-tabs">
+          <button class="active" type="button">全部</button>
+          <button type="button">进行中</button>
+          <button type="button">未开始</button>
+          <button type="button">已结束</button>
+        </nav>
+
+        <section class="manage-list">
+          <article class="manage-card">
+            <div class="manage-card-head">
+              <div class="manage-title"><span class="manage-doc"></span><strong>长方形巩固练习</strong><i>›</i></div>
+              <span class="status-pill active">进行中</span>
+            </div>
+            <div class="stats-grid">
+              <div><strong>20</strong><span>未提交</span></div>
+              <div><strong>18</strong><span>待批改</span></div>
+              <div><strong>2</strong><span>待订正</span></div>
+              <div><strong>2</strong><span>已批改</span></div>
+            </div>
+          </article>
+
+          <article class="manage-card">
+            <div class="manage-card-head">
+              <div class="manage-title"><span class="manage-doc"></span><strong>模拟考试准备</strong><i>›</i></div>
+              <span class="status-pill active">进行中</span>
+            </div>
+            <div class="stats-grid one">
+              <div><strong>15</strong><span>未提交</span></div>
+            </div>
+          </article>
+
+          <article class="manage-card">
+            <div class="manage-card-head">
+              <div class="manage-title"><span class="manage-doc"></span><strong>作业3月12日星期四</strong><i>›</i></div>
+              <span class="status-pill pending">未开始</span>
+            </div>
+            <div class="stats-grid">
+              <div><strong>-</strong><span>未提交</span></div>
+              <div><strong>-</strong><span>待批改</span></div>
+              <div><strong>-</strong><span>待订正</span></div>
+              <div><strong>-</strong><span>已批改</span></div>
+            </div>
+          </article>
+
+          <article class="manage-card">
+            <div class="manage-card-head">
+              <div class="manage-title"><span class="manage-doc"></span><strong>作业3月12日星期四</strong><i>›</i></div>
+              <span class="status-text">已结束</span>
+            </div>
+            <div class="stats-grid">
+              <div><strong>0</strong><span>未提交</span></div>
+              <div><strong>0</strong><span>待批改</span></div>
+              <div><strong>0</strong><span>待订正</span></div>
+              <div><strong>30</strong><span>已批改</span></div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </section>
+
+    <section class="qrcode-page hidden-page" id="qrcode-page">
+      <div class="status manage-status">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <span class="signal"></span>
+          <span class="wifi"></span>
+          <span class="battery"></span>
+        </div>
+      </div>
+      <header class="manage-header">
+        <button class="back" id="back-from-qrcode" type="button">‹</button>
+        <h1>我的二维码</h1>
+        <span></span>
+      </header>
+      <main class="qrcode-main">
+        <article class="qrcode-card">
+          <div class="qrcode-profile">
+            <div class="qrcode-avatar">静</div>
+            <div class="qrcode-info">
+              <strong>杨静洋老师</strong>
+              <span>扫码添加班级群</span>
+            </div>
+          </div>
+          <div class="qrcode-board" aria-label="二维码图案">
+            <div class="qr-finder tl"></div>
+            <div class="qr-finder tr"></div>
+            <div class="qr-finder bl"></div>
+            <div class="qr-dots"></div>
+          </div>
+          <p class="qrcode-tip">请使用微信扫一扫识别二维码</p>
+        </article>
+      </main>
+    </section>
+
+    <section class="overlay hidden" id="task-overlay"></section>
+  </div>
+  <script type="module" src="./src/task-feature.js"></script>
+</body>
+</html>
