@@ -173,10 +173,10 @@ function renderWorkspacePanel() {
   if (state.tasks.length === 0) {
     els.workspacePanelContent.innerHTML = `
       <article class="review-task-item empty">
-        <span class="review-task-icon">馃摑</span>
+        <span class="review-task-icon">📝</span>
         <span class="review-task-title">暂无已发布任务</span>
         <span class="review-task-count">0</span>
-        <span class="review-task-arrow">鈥?/span>
+        <span class="review-task-arrow">›</span>
       </article>`;
     return;
   }
@@ -186,10 +186,10 @@ function renderWorkspacePanel() {
       const submittedCount = task.submissions?.size || 0;
       return `
       <article class="review-task-item">
-        <span class="review-task-icon">馃摑</span>
+        <span class="review-task-icon">📝</span>
         <span class="review-task-title">${escapeHtml(task.title || "未命名任务")}</span>
         <span class="review-task-count">${submittedCount}</span>
-        <span class="review-task-arrow">鈥?/span>
+        <span class="review-task-arrow">›</span>
       </article>`;
     })
     .join("");
@@ -274,7 +274,7 @@ els.togglePanel.addEventListener("click", () => {
   panelExpanded = !panelExpanded;
   els.panel.classList.toggle("collapsed", !panelExpanded);
   els.inputBar.classList.toggle("panel-collapsed", !panelExpanded);
-  els.togglePanel.textContent = panelExpanded ? "+" : "脳";
+  els.togglePanel.textContent = panelExpanded ? "+" : "×";
 });
 
 function openComposeTask({ lockToGroup = false } = {}) {
@@ -540,8 +540,8 @@ function renderTaskCards() {
       <div class="task-message">
         <article class="task-card">
           <div class="task-head">
-            <span class="task-icon">馃摑</span>
-            <span>瀛︿範浠诲姟</span>
+            <span class="task-icon">📝</span>
+            <span>学习任务</span>
           </div>
           <div class="task-name">${escapeHtml(task.title)}</div>
           <div class="task-row"><span>开始时间</span><strong>${formatPickerText(task.startAt)}</strong></div>
@@ -559,7 +559,7 @@ function distributeTaskToConversations(task) {
   const classConversation = getConversationById("class-room");
   if (classConversation) {
     classConversation.tasks = [task.id, ...classConversation.tasks];
-    classConversation.preview = `銆愪綔涓氥€?{task.title}`;
+    classConversation.preview = `【作业】${task.title}`;
     classConversation.lastMessageAt = now;
   }
 
@@ -572,7 +572,7 @@ function distributeTaskToConversations(task) {
       state.conversations.push(conversation);
     }
     conversation.tasks = [task.id, ...conversation.tasks];
-    conversation.preview = `銆愪綔涓氥€?{task.title}`;
+    conversation.preview = `【作业】${task.title}`;
     conversation.lastMessageAt = now;
     conversation.unread = (conversation.unread || 0) + 1;
   });
