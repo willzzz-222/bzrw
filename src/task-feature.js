@@ -532,6 +532,10 @@ function publishTask() {
 
 function renderTaskCards() {
   const conversation = getActiveConversation();
+  if (!conversation || conversation.type === "group") {
+    els.taskCardContainer.innerHTML = "";
+    return;
+  }
   const taskIds = new Set(conversation?.tasks || []);
   const visibleTasks = state.tasks.filter((task) => taskIds.has(task.id));
 
@@ -556,11 +560,14 @@ function renderTaskCards() {
 
 function distributeTaskToConversations(task) {
   const now = task.publishedAt || new Date().toISOString();
-  const classConversation = getConversationById("class-room");
-  if (classConversation) {
-    classConversation.tasks = [task.id, ...classConversation.tasks];
-    classConversation.preview = `【作业】${task.title}`;
-    classConversation.lastMessageAt = now;
+  const isClassPublish = state.publishMode === "group";
+  if (!isClassPublish) {
+    const classConversation = getConversationById("class-room");
+    if (classConversation) {
+      classConversation.tasks = [task.id, ...classConversation.tasks];
+      classConversation.preview = `【作业】${task.title}`;
+      classConversation.lastMessageAt = now;
+    }
   }
 
   const selectedStudents = students.filter((student) => task.targetStudentIds.includes(student.id));
