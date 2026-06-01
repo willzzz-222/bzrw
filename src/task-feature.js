@@ -42,6 +42,7 @@ const state = {
   draft: initialDraft(),
   tasks: [],
   workspaceTab: "course",
+  manageReturnPage: "chat-list",
   conversations: [createClassConversation()],
   activeConversationId: "class-room",
   overlay: "",
@@ -209,6 +210,7 @@ els.workspaceTabReview?.addEventListener("click", () => {
 });
 els.workspaceOpenTaskManage.addEventListener("click", () => {
   closeOverlay();
+  state.manageReturnPage = "workspace";
   els.workspacePage.classList.add("hidden-page");
   els.chatListPage.classList.add("hidden-page");
   els.groupChatPage.classList.add("hidden-page");
@@ -232,6 +234,7 @@ els.backToList.addEventListener("click", () => {
 
 els.openTaskManage.addEventListener("click", () => {
   els.moreMenu.classList.add("hidden");
+  state.manageReturnPage = "chat-list";
   els.workspacePage.classList.add("hidden-page");
   els.chatListPage.classList.add("hidden-page");
   els.groupChatPage.classList.add("hidden-page");
@@ -249,6 +252,10 @@ els.openMyQrcode.addEventListener("click", () => {
 });
 
 els.backFromManage.addEventListener("click", () => {
+  if (state.manageReturnPage === "workspace") {
+    showWorkspacePage();
+    return;
+  }
   showChatListPage();
 });
 
@@ -617,10 +624,12 @@ function renderConversationHeader(conversation) {
     els.groupTitle.textContent = conversation.title;
     els.groupSubtitle.textContent = "家校私聊";
     els.introBubble?.classList.add("hidden");
+    els.triggerTask?.classList.add("hidden");
   } else {
     els.groupTitle.textContent = "班级群";
     els.groupSubtitle.textContent = "班级通知";
     els.introBubble?.classList.remove("hidden");
+    els.triggerTask?.classList.remove("hidden");
   }
 }
 
@@ -721,7 +730,7 @@ function renderStudents() {
           ? `<div class="select-all readonly"><span>发布范围：本群全部学员（${students.length}人）</span></div>`
           : `<button class="select-all" type="button" data-action="toggle-all">
               <span class="check ${isAll ? "checked" : ""}"></span>
-              <span>全选</span>
+              <span>全选本群</span>
             </button>`
       }
       <div class="student-list">
