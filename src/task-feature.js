@@ -34,6 +34,7 @@ const initialDraft = () => ({
   dueAt: "",
   submitType: SubmitType.IMAGE,
   noReview: false,
+  privateSendEnabled: false,
   publishGroupIds: [groups[0].id]
 });
 
@@ -397,6 +398,13 @@ els.overlay.addEventListener("click", (event) => {
     return;
   }
 
+  if (action === "toggle-private-send") {
+    syncTaskForm();
+    state.draft.privateSendEnabled = !state.draft.privateSendEnabled;
+    renderOverlay();
+    return;
+  }
+
   if (action === "cycle-submit-type") {
     syncTaskForm();
     state.draft.submitType =
@@ -522,7 +530,9 @@ function publishTask() {
 
   state.tasks.unshift(publishedTask);
   state.currentTaskId = publishedTask.id;
-  distributeTaskToConversations(publishedTask);
+  if (state.draft.privateSendEnabled) {
+    distributeTaskToConversations(publishedTask);
+  }
 
   state.draft = initialDraft();
   renderTaskCards();
@@ -795,6 +805,12 @@ function renderCompose() {
           <span class="review-switch ${state.draft.noReview ? "on" : ""}"><b></b></span>
         </button>
       </section>
+      <section class="assign-card option-card single">
+        <button type="button" class="option-row review-row" data-action="toggle-private-send">
+          <strong>私聊发送 <em>?</em></strong>
+          <span class="review-switch ${state.draft.privateSendEnabled ? "on" : ""}"><b></b></span>
+        </button>
+      </section>
       <input id="task-start" class="hidden-picker" type="datetime-local" value="${state.draft.startAt}" />
       <input id="task-due" class="hidden-picker" type="datetime-local" value="${toDateTimeLocalValue(state.draft.dueAt)}" />
       <div class="inline-error" id="inline-error"></div>
@@ -832,13 +848,15 @@ function renderConfirm() {
           <dd>${submitTypeLabel(state.draft.submitType)}</dd>
           <dt>无需批改</dt>
           <dd>${state.draft.noReview ? "开启" : "关闭"}</dd>
+          <dt>私聊发送</dt>
+          <dd>${state.draft.privateSendEnabled ? "开启" : "关闭"}</dd>
         </dl>
       </div>
       <div class="parent-preview">
-        <div class="task-head"><span class="task-icon">📝</span><span>家长将收到</span></div>
+        <div class="task-head"><span class="task-icon">📝</span><span>${state.draft.privateSendEnabled ? "家长将收到" : "家长不会收到作业卡片"}</span></div>
         <div class="task-name">${escapeHtml(state.draft.title)}</div>
-        <div class="task-row"><span>状态</span><strong>待提交</strong></div>
-        <div class="task-link static">去完成 ></div>
+        <div class="task-row"><span>状态</span><strong>${state.draft.privateSendEnabled ? "待提交" : "不发送"}</strong></div>
+        <div class="task-link static">${state.draft.privateSendEnabled ? "去完成 >" : "仅发布任务 >"}</div>
       </div>
       <div class="inline-error" id="inline-error"></div>
     </div>
